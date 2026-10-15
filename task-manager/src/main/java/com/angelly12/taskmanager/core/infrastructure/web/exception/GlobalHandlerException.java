@@ -21,4 +21,16 @@ public class GlobalHandlerException {
         return ResponseEntity.status(e.getStatusCode())
                 .body(response);
     }
+
+    @ExceptionHandler(Exception.class)
+    public ResponseEntity<ResponseError> unexpectedException(Exception e)
+    {
+        ResponseError response = new ResponseError(
+                500,
+                "Unexpected error",
+                "INTERNAL_SERVER_ERROR"
+        );
+
+        return ResponseEntity.internalServerError().body(response);
+    }
 }

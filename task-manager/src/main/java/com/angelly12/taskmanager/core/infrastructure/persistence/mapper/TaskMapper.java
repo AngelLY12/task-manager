@@ -32,20 +32,11 @@ public final class TaskMapper {
                 .build();
     }
 
-    public static TaskEntity createToEntity(CreateTaskRequest request)
+    public static void updateEntity(TaskEntity entity, Task domain)
     {
-        return TaskEntity.builder()
-                .title(request.title())
-                .description(request.description())
-                .status(request.status() != null ? request.status() : TaskStatus.PENDING)
-                .build();
-    }
-
-    public static void updateEntity(TaskEntity entity, UpdateTaskRequest request)
-    {
-        entity.setTitle(request.title());
-        entity.setDescription(request.description());
-        entity.setStatus(request.status());
+        entity.setTitle(domain.getTitle());
+        entity.setDescription(domain.getDescription());
+        entity.setStatus(domain.getStatus());
     }
 
 }
