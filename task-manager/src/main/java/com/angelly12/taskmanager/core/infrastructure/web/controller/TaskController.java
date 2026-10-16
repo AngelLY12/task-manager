@@ -39,7 +39,9 @@ public class TaskController {
     @io.swagger.v3.oas.annotations.responses.ApiResponses({
             @ApiResponse(
                     responseCode = "201",
-                    description = "Task ${task_title} created successfully"),
+                    description = "Task ${task_title} created successfully"
+            ),
+
             @ApiResponse(
                     responseCode = "422",
                     description = "Request validation failed",
@@ -60,12 +62,12 @@ public class TaskController {
             )
     })
     @PostMapping
-    public ResponseEntity<ResponseSuccess<Void>> create(
+    public ResponseEntity<ResponseSuccess<Task>> create(
             @Valid @RequestBody CreateTaskRequest request
             ){
         Task task = TaskMapper.createToDomain(request);
         Task created = service.create(task);
-        return ApiResponses.created("Task "+created.getTitle()+ " created successfully");
+        return ApiResponses.created("Task "+created.getTitle()+ " created successfully", created);
     }
 
     @Operation(
@@ -135,7 +137,8 @@ public class TaskController {
     @io.swagger.v3.oas.annotations.responses.ApiResponses({
             @ApiResponse(
                     responseCode = "200",
-                    description = "Task ${task_title} updated successfully"),
+                    description = "Task ${task_title} updated successfully"
+            ),
             @ApiResponse(
                     responseCode = "404",
                     description = "Task not found",
@@ -165,14 +168,14 @@ public class TaskController {
             )
     })
     @PutMapping("/{id}")
-    public ResponseEntity<ResponseSuccess<Void>> update(
+    public ResponseEntity<ResponseSuccess<Task>> update(
             @Valid @RequestBody UpdateTaskRequest request,
             @PathVariable Long id
             )
     {
         Task task = TaskMapper.updateToDomain(request);
         Task updated = service.update(id, task);
-        return ApiResponses.success("Task "+updated.getTitle()+ " updated successfully");
+        return ApiResponses.success("Task "+updated.getTitle()+ " updated successfully", updated);
     }
 
     @Operation(
