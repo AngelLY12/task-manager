@@ -88,7 +88,7 @@ mvnw.cmd spring-boot:run
 
 El proyecto utiliza una **arquitectura hexagonal** para separar el dominio, la lógica de aplicación y los detalles de infraestructura, reduciendo el acoplamiento y facilitando el mantenimiento.
 
-- **Dominio:** contiene las entidades de negocio, enumeraciones, excepciones de dominio y contratos de repositorio.
+- **Dominio:** contiene las entidades de negocio, enums, excepciones de dominio y contratos de repositorio.
 - **Aplicación:** contiene los servicios de aplicación que coordinan los casos de uso.
 - **Infraestructura:** contiene los adaptadores de persistencia, repositorios JPA, entidades de persistencia, mapeadores, controladores REST, DTO y configuración de la API.
 
@@ -103,7 +103,7 @@ Debido a que los servicios de Azure contemplados en la prueba técnica no estuvi
 ### Patrones y mecanismos aplicados
 
 - **Repository:** los contratos de repositorio separan la lógica de aplicación de los detalles de acceso a datos. Los adaptadores de infraestructura implementan estos contratos mediante Spring Data JPA.
-- **Inyección de dependencias:** Spring administra las dependencias entre componentes, permitiendo que los servicios dependan de abstracciones.
+- **Inyección de dependencias:** Se utilizó inyección por constructor. Spring administra las dependencias entre componentes, permitiendo que los servicios dependan de abstracciones.
 - **Gestión transaccional:** Spring Data JPA administra las transacciones de persistencia. Para el alcance actual del CRUD no se requiere una implementación propia de Unidad de Trabajo (*Unit of Work*).
 
 ## Control de versiones
